@@ -1,2 +1,4 @@
 # My Website
-Our personal website that demonstrates our DevOps skills, technologies and concepts
+
+Welcome to our Personal Website landing page </br>
+This is our personal website that demonstrates our DevOps skills, technologies and concepts
