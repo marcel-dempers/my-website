@@ -37,11 +37,11 @@ if [ ! -d "$DEPLOYMENT_SOURCE_DIR" ]; then
     echo "Error: there was an error running the git command"
     exit 1
   fi
-  
+
   echo "source directory created." 
 else 
   echo "source directory exists, pulling latest changes..."
-  git pull origin master
+  git pull origin main
 
   if [ $? -ne 0 ]
   then
