@@ -27,6 +27,7 @@ jobs:
       - name: build & package
         run: |
           PACKAGE_NUMBER=$(date +%Y%m%d-%H%M%S%N)
+          echo "PACKAGE_NUMBER=$PACKAGE_NUMBER" >> $GITHUB_ENV
           tar -cvf package-${PACKAGE_NUMBER}.tar.gz src/
           
       # Runs a set of commands using the runners shell
