@@ -33,4 +33,4 @@ jobs:
       - name: push package
         run: |
           mkdir -p /home/github/packages/
-          mv $package-${PACKAGE_NUMBER}.tar.gz /home/github/packages/
+          mv package-${PACKAGE_NUMBER}.tar.gz /home/github/packages/
