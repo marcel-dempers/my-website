@@ -38,3 +38,7 @@ jobs:
       - name: deploy package
         run: | 
           . infra/scripts/deploy.sh $PACKAGE_NUMBER
+      
+      - name: configure
+        run: | 
+          . infra/scripts/configure.sh $PACKAGE_NUMBER
