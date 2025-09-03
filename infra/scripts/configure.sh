@@ -28,7 +28,7 @@ CONFIG_FILE="$DEPLOYMENT_DEST_DIR/nginx.conf"
 
 if [ -f "$CONFIG_FILE" ]; then
   echo "updating website configuration..."
-  sed -i "s|root $DEPLOYMENT_DEST_DIR/.*;|root $NEW_DEPLOYMENT_DIR;|" "$CONFIG_FILE"
+  sed -i "s|root $DEPLOYMENT_DEST_DIR.*;|root $NEW_DEPLOYMENT_DIR;|" "$CONFIG_FILE"
   echo "website configuration updated."
 fi
 echo "configuration complete"
