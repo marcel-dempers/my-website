@@ -27,5 +27,5 @@ fi
 
 echo "extracting package /home/github/packages/package-${PACKAGE_NUMBER}.tar.gz"
 
-tar -xzf -C $PWD  /home/github/packages/package-${PACKAGE_NUMBER}.tar.gz
+tar -C ${PWD} -xzf /home/github/packages/package-${PACKAGE_NUMBER}.tar.gz
 ls -la $PWD
