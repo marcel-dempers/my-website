@@ -23,14 +23,13 @@ jobs:
 ######################################################################    
       - uses: actions/checkout@v4
         name: get code
-      # Runs a single command using the runners shell
+
       - name: build & package
         run: |
           PACKAGE_NUMBER=$(date +%Y%m%d-%H%M%S%N)
           echo "PACKAGE_NUMBER=$PACKAGE_NUMBER" >> $GITHUB_ENV
-          tar -cvf package-${PACKAGE_NUMBER}.tar.gz src/
-          
-      # Runs a set of commands using the runners shell
+          tar -czvf package-${PACKAGE_NUMBER}.tar.gz src/
+
       - name: push package
         run: |
           mkdir -p /home/github/packages/
