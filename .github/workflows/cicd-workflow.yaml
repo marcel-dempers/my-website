@@ -38,4 +38,4 @@ jobs:
 ######################################################################
       - name: deploy package
         run: | 
-          /infra/scripts/deploy.sh $PACKAGE_NUMBER
+          . infra/scripts/deploy.sh $PACKAGE_NUMBER
