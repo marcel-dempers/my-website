@@ -42,3 +42,7 @@ jobs:
       - name: configure
         run: | 
           . infra/scripts/configure.sh $PACKAGE_NUMBER
+      
+      - name: make live
+        run: | 
+          . infra/scripts/live.sh $PACKAGE_NUMBER
