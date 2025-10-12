@@ -3,7 +3,7 @@
 # settings
 GITHUB_REPO_URL="https://github.com/marcel-dempers/my-website.git"
 DEPLOYMENT_SOURCE_DIR="$HOME/gitrepos/my-website"
-DEPLOYMENT_DEST_DIR="$HOME/webites/my-website"
+DEPLOYMENT_DEST_DIR="$HOME/websites/my-website"
 CONFIG_FILE="$DEPLOYMENT_DEST_DIR/nginx.conf"
 
 echo "starting our deployment script..."
