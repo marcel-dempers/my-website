@@ -6,7 +6,7 @@ name: CICD
 on:
   # Triggers the workflow on push or pull request events but only for the $default-branch branch
   push:
-    branches: [ main, ch5-wip ]
+    branches: [ main, chapter-06 ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -20,30 +20,32 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-######################################################################    
+######################################################################
       - uses: actions/checkout@v4
         name: get code
 
-      - name: build & package
+      - name: build & tag image
         run: |
-          PACKAGE_NUMBER=$(date +%Y%m%d-%H%M%S%N)
-          echo "PACKAGE_NUMBER=$PACKAGE_NUMBER" >> $GITHUB_ENV
-          tar -czvf package-${PACKAGE_NUMBER}.tar.gz src/
+          IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/my-website"
+          IMAGE_TAG=$(echo $GITHUB_SHA | cut -c1-6)
+          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+          docker build . -t $IMAGE_NAME:$IMAGE_TAG
 
-      - name: push package
+      - name: publish image
         run: |
-          mkdir -p /home/github/packages/
-          mv package-${PACKAGE_NUMBER}.tar.gz /home/github/packages/
+          echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker push $IMAGE_NAME:$IMAGE_TAG
 ######################################################################
       - name: deploy package
-        run: | 
-          . infra/scripts/deploy.sh $PACKAGE_NUMBER
-      
+        run: |
+          . infra/scripts/deploy.sh $IMAGE_NAME $IMAGE_TAG
+
       - name: configure
-        run: | 
-          . infra/scripts/configure.sh $PACKAGE_NUMBER
-      
+        run: |
+          . infra/scripts/configure.sh $IMAGE_NAME $IMAGE_TAG
+
       - name: make live
-        run: | 
-          . infra/scripts/live.sh $PACKAGE_NUMBER
+        run: |
+          . infra/scripts/live.sh $IMAGE_NAME $IMAGE_TAG
 ######################################################################

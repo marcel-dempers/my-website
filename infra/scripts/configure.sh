@@ -1,34 +1,12 @@
 #!/bin/bash
 
-# settings
-DEPLOYMENT_DEST_DIR="/websites/my-website"
-
-#inputs
-PACKAGE_NUMBER=$1
-
 echo "starting our configuration script..."
 
-# Validate Inputs
-if [ -z "$PACKAGE_NUMBER" ]; then
-  echo "ERROR: PACKAGE_NUMBER is not passed in!"
-  exit 1
-fi
+# Unlike Chapter 5, our nginx.conf is baked into the container image at build time.
+# There is no external configuration file to patch on the server for this deployment.
+# This step remains as a placeholder in our pipeline stages, and we'll revisit it
+# when we cover orchestration, where per-environment configuration can be injected
+# without rebuilding the image.
 
-if [ -z "$DEPLOYMENT_DEST_DIR" ]; then
-  echo "ERROR: destination directory is not set!"
-  exit 1
-fi
-
-
-NEW_DEPLOYMENT_DIR="$DEPLOYMENT_DEST_DIR/$PACKAGE_NUMBER"
-
-echo "updating website configuration..."
-
-CONFIG_FILE="$DEPLOYMENT_DEST_DIR/nginx.conf"
-
-if [ -f "$CONFIG_FILE" ]; then
-  echo "updating website configuration..."
-  sed -i "s|root $DEPLOYMENT_DEST_DIR.*;|root $NEW_DEPLOYMENT_DIR;|" "$CONFIG_FILE"
-  echo "website configuration updated."
-fi
+echo "no configuration changes required for containers"
 echo "configuration complete"
